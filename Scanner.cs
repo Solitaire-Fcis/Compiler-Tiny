@@ -11,7 +11,7 @@ public enum Token_Class
     IDENTIFIER,PROGRAM,FUNCTION,PLUSOP,MINUSOP,MULOP,DIVOP,LTOP,MTOP,EQOP,
     NEQOP,COMMA,SEMICOLON,DOT,LBRACES,RBRACES,LPARENT,RPARENT,ASSIGN,COMMENT,NA
 }
-namespace WindowsFormsApp1
+namespace Tiny_Compiler
 {
     // Token Class
     public class Token
@@ -50,8 +50,11 @@ namespace WindowsFormsApp1
             Operators_List.Add("-", Token_Class.MINUSOP);
             Operators_List.Add("/", Token_Class.DIVOP);
             Operators_List.Add("*", Token_Class.MULOP);
-            Operators_List.Add("=", Token_Class.EQOP);
             Operators_List.Add(":=", Token_Class.ASSIGN);
+            Operators_List.Add("<", Token_Class.LTOP);
+            Operators_List.Add(">", Token_Class.MTOP);
+            Operators_List.Add("=", Token_Class.EQOP);
+            Operators_List.Add("<>", Token_Class.NEQOP);
             Operators_List.Add("(", Token_Class.LPARENT);
             Operators_List.Add(")", Token_Class.RPARENT);
             Operators_List.Add("{", Token_Class.LBRACES);

@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApp1
+namespace Tiny_Compiler
 {
     partial class Form1
     {
