@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 // All Token Classes As Enumerations
 public enum Token_Class
 {
-   INT,FLOAT,STRING,READ,WRITE,REPEAT,UNTIL,IF,ELSEIF,ELSE,RETURN,ENDL,
+   DINT,DFLOAT,DSTRING,NUMBER,STRING,READ,WRITE,REPEAT,UNTIL,IF,ELSEIF,ELSE,RETURN,ENDL,
     IDENTIFIER,PROGRAM,FUNCTION,PLUSOP,MINUSOP,MULOP,DIVOP,LTOP,MTOP,EQOP,
-    NEQOP,COMMA,SEMICOLON,DOT,LBRACES,RBRACES,LPARENT,RPARENT
+    NEQOP,COMMA,SEMICOLON,DOT,LBRACES,RBRACES,LPARENT,RPARENT,ASSIGN,COMMENT,NA
 }
 namespace WindowsFormsApp1
 {
@@ -23,42 +23,179 @@ namespace WindowsFormsApp1
     public class Scanner
     {
         // Declarations of DSes that will be used through scanning
-        public List<Token> Tokens = new List<Token>();
-        public static Dictionary<String, Token_Class> res_keys = new Dictionary<string, Token_Class>();
-        public static Dictionary<String, Token_Class> ops = new Dictionary<string, Token_Class>();
+        public static List<Token> Tokens_List = new List<Token>();
+        public static Dictionary<String, Token_Class> Reserved_Keys_List = new Dictionary<string, Token_Class>();
+        public static Dictionary<String, Token_Class> Operators_List = new Dictionary<string, Token_Class>();
         
         public Scanner()
         {
             // Associating reserved characters/words with their own Token class
-            res_keys.Add("int", Token_Class.INT);
-            res_keys.Add("float", Token_Class.FLOAT);
-            res_keys.Add("string", Token_Class.STRING);
-            res_keys.Add("if", Token_Class.IF);
-            res_keys.Add("elseif", Token_Class.ELSEIF);
-            res_keys.Add("else", Token_Class.ELSE);
-            res_keys.Add("write", Token_Class.WRITE);
-            res_keys.Add("read", Token_Class.READ);
-            res_keys.Add("repeat", Token_Class.REPEAT);
-            res_keys.Add("until", Token_Class.UNTIL);
-            res_keys.Add("endl", Token_Class.ENDL);
-            res_keys.Add("return", Token_Class.RETURN);
+            Reserved_Keys_List.Add("int", Token_Class.DINT);
+            Reserved_Keys_List.Add("float", Token_Class.DFLOAT);
+            Reserved_Keys_List.Add("string", Token_Class.DSTRING);
+            Reserved_Keys_List.Add("if", Token_Class.IF);
+            Reserved_Keys_List.Add("elseif", Token_Class.ELSEIF);
+            Reserved_Keys_List.Add("else", Token_Class.ELSE);
+            Reserved_Keys_List.Add("write", Token_Class.WRITE);
+            Reserved_Keys_List.Add("read", Token_Class.READ);
+            Reserved_Keys_List.Add("repeat", Token_Class.REPEAT);
+            Reserved_Keys_List.Add("until", Token_Class.UNTIL);
+            Reserved_Keys_List.Add("endl", Token_Class.ENDL);
+            Reserved_Keys_List.Add("return", Token_Class.RETURN);
 
-            ops.Add(",", Token_Class.COMMA);
-            ops.Add(";", Token_Class.SEMICOLON);
-            ops.Add(".", Token_Class.DOT);
-            ops.Add("+", Token_Class.PLUSOP);
-            ops.Add("-", Token_Class.MINUSOP);
-            ops.Add("/", Token_Class.DIVOP);
-            ops.Add("*", Token_Class.MULOP);
-            ops.Add("(", Token_Class.LPARENT);
-            ops.Add(")", Token_Class.RPARENT);
-            ops.Add("{", Token_Class.LBRACES);
-            ops.Add("}", Token_Class.RBRACES);
+            Operators_List.Add(",", Token_Class.COMMA);
+            Operators_List.Add(";", Token_Class.SEMICOLON);
+            Operators_List.Add(".", Token_Class.DOT);
+            Operators_List.Add("+", Token_Class.PLUSOP);
+            Operators_List.Add("-", Token_Class.MINUSOP);
+            Operators_List.Add("/", Token_Class.DIVOP);
+            Operators_List.Add("*", Token_Class.MULOP);
+            Operators_List.Add("(", Token_Class.LPARENT);
+            Operators_List.Add(")", Token_Class.RPARENT);
+            Operators_List.Add("{", Token_Class.LBRACES);
+            Operators_List.Add("}", Token_Class.RBRACES);
+            Operators_List.Add(":=", Token_Class.ASSIGN);
         }
         // Scanning function for identifying and attaching lexemes with token_classes
-        public static void Scan()
+        public void Scan(String SRC)
         {
+            // int main;
+            for(int i = 0; i < SRC.Length; i++)
+            {
+                int j = i;
+                char Present_Character = SRC[i];
+                String Lex = Present_Character.ToString();
+                if (Present_Character == ' ' || Present_Character == '\r' || Present_Character == '\n')
+                    continue;
+                else if (char.IsLetter(Present_Character))
+                {
+                    while (char.IsLetterOrDigit(SRC[j]))
+                    {
+                        Lex.Append(SRC[j]);
+                        j++;
+                    }
+                }
+                else if (char.IsDigit(Present_Character))
+                {
+                    while (char.IsDigit(SRC[j]))
+                    {
+                        Lex.Append(SRC[j]);
+                        j++;
+                    }
+                }
+                else if(Present_Character == '/' && SRC[j + 1] == '*')
+                {
+                    j += 2;
+                    while (SRC.Length != j)
+                    {
+                        Lex.Append(SRC[j]);
+                        if (SRC[j] == '/')
+                            break;
+                        j++;
+                    }
+                }
+                else if (Present_Character == '\"')
+                {
+                    j += 1;
+                    while (SRC.Length != j)
+                    {
+                        Lex.Append(SRC[j]);
+                        if (SRC[j] == '\"')
+                            break;
+                        j++;
+                    }
+                }
+                else if(Present_Character == ':' && SRC[++j] == '=')
+                    Lex.Append(SRC[j]);
+                i = j;
+                FindTokenClass(Lex);
+            }
+            Compiler.Tokens_List = Tokens_List;
+        }
+        public static void FindTokenClass(String Lex)
+        {
+            bool NA = false;
+            Token token = new Token();
+            token.lex = Lex;
+            // Checking If Reserved Keyword
+            if (isReserved_Keyword(Lex))
+                token.token_type = Reserved_Keys_List[Lex];
+            // Checking If Identifier
+            if (isIdentifier(Lex))
+                token.token_type = Token_Class.IDENTIFIER;
+            // Checking If Constant
+            if (isConstant(Lex))
+                token.token_type = Token_Class.NUMBER;
+            // Checking If Operator
+            if (isOperator(Lex))
+                token.token_type = Operators_List[Lex];
+            // Checking If Comment
+            if (isComment(Lex))
+                token.token_type = Token_Class.COMMENT;
+            // Checking If String Value
+            if (isString(Lex))
+                token.token_type = Token_Class.STRING;
+            // Unidentfied Lexeme
+            else
+            {
+                token.token_type = Token_Class.NA;
+                Compiler.Syntax_Errors.Add(Lex);
+                NA = true;
+            }
+            if(!NA)
+                Tokens_List.Add(token);
+        }
+        public static bool isIdentifier(String Lex)
+        {
+            bool Valid = true;
+            if (char.IsLetter(Lex[0]))
+            {
+                int i = 1;
+                while (Lex.Length > i)
+                {
+                    if (!char.IsLetterOrDigit(Lex[i]))
+                        Valid = false;
+                    i++;
+                }
+            }
+            return Valid;
+        }
+        public static bool isOperator(String Lex)
+        {
+            if (Operators_List.ContainsKey(Lex))
+                return true;
+            return false;
+        }
+        public static bool isConstant(String Lex)
+        {
+            bool Valid = true;
+            int i = 0;
+            while (Lex.Length > i)
+            {
+                if (!char.IsDigit(Lex[i]))
+                    Valid = false;
+                i++;
+            }
+            return Valid;
+        }
+        public static bool isReserved_Keyword(String Lex)
+        {
+            if (Reserved_Keys_List.ContainsKey(Lex))
+                return true;
+            return false;
+        }
+        public static bool isComment(String Lex)
+        {
+            if (Lex[0] == '/' && Lex[1] == '*' && Lex[Lex.Length - 2] == '*' && Lex[Lex.Length - 1] == '/')
+                return true;
+            return false;
 
+        }
+        public static bool isString(String Lex)
+        {
+            if (Lex[0] == '\"' && Lex[Lex.Length-1] == '\"')
+                return true;
+            return false;
         }
     }
 }

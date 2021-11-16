@@ -37,6 +37,7 @@ namespace WindowsFormsApp1
         private void button_WOC3_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
+            Compiler.Tokens_List.Clear();
         }
         // Source Code
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -46,17 +47,38 @@ namespace WindowsFormsApp1
         // Compile 
         private void button_WOC1_Click(object sender, EventArgs e)
         {
-
+            textBox2.Clear();
+            string SRC = textBox1.Text;
+            Compiler.Compile(SRC);
+            Tokens_Output();
+            Errors_Output();
         }
         // Tokens Filtered
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-        // Errors in Source Code
+        
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            
+        }
+        // Print Tokens Identified in Source Code
+        private void Tokens_Output()
+        {
+            for (int i = 0; i < Compiler.Tokens_List.Count; i++)
+            {
+                dataGridView1.Rows.Add(Compiler.Tokens_List.ElementAt(i).lex, Compiler.Tokens_List.ElementAt(i).token_type);
+            }
+        }
+        // Print Errors in Source Code
+        private void Errors_Output()
+        {
+            for (int i = 0; i < Compiler.Syntax_Errors.Count; i++)
+            {
+                textBox2.Text += Compiler.Syntax_Errors[i];
+                textBox2.Text += "\r\n";
+            }
         }
     }
 }
