@@ -36,8 +36,10 @@ namespace WindowsFormsApp1
         // Clear GridView
         private void button_WOC3_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
+            Compiler.Syntax_Errors.Clear();
             Compiler.Tokens_List.Clear();
+            dataGridView1.Rows.Clear();
+            textBox2.Clear();
         }
         // Source Code
         private void textBox1_TextChanged(object sender, EventArgs e)

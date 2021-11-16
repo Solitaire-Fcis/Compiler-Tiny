@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 // All Token Classes As Enumerations
 public enum Token_Class
 {
-   DINT,DFLOAT,DSTRING,NUMBER,STRING,READ,WRITE,REPEAT,UNTIL,IF,ELSEIF,ELSE,RETURN,ENDL,
+   DATATYPE_INT,DATATYPE_FLOAT,DATATYPE_STRING,NUMBER,STRING,READ,WRITE,REPEAT,UNTIL,IF,ELSEIF,ELSE,RETURN,ENDL,
     IDENTIFIER,PROGRAM,FUNCTION,PLUSOP,MINUSOP,MULOP,DIVOP,LTOP,MTOP,EQOP,
     NEQOP,COMMA,SEMICOLON,DOT,LBRACES,RBRACES,LPARENT,RPARENT,ASSIGN,COMMENT,NA
 }
@@ -30,9 +30,9 @@ namespace WindowsFormsApp1
         public Scanner()
         {
             // Associating reserved characters/words with their own Token class
-            Reserved_Keys_List.Add("int", Token_Class.DINT);
-            Reserved_Keys_List.Add("float", Token_Class.DFLOAT);
-            Reserved_Keys_List.Add("string", Token_Class.DSTRING);
+            Reserved_Keys_List.Add("int", Token_Class.DATATYPE_INT);
+            Reserved_Keys_List.Add("float", Token_Class.DATATYPE_FLOAT);
+            Reserved_Keys_List.Add("string", Token_Class.DATATYPE_STRING);
             Reserved_Keys_List.Add("if", Token_Class.IF);
             Reserved_Keys_List.Add("elseif", Token_Class.ELSEIF);
             Reserved_Keys_List.Add("else", Token_Class.ELSE);
@@ -50,11 +50,12 @@ namespace WindowsFormsApp1
             Operators_List.Add("-", Token_Class.MINUSOP);
             Operators_List.Add("/", Token_Class.DIVOP);
             Operators_List.Add("*", Token_Class.MULOP);
+            Operators_List.Add("=", Token_Class.EQOP);
+            Operators_List.Add(":=", Token_Class.ASSIGN);
             Operators_List.Add("(", Token_Class.LPARENT);
             Operators_List.Add(")", Token_Class.RPARENT);
             Operators_List.Add("{", Token_Class.LBRACES);
             Operators_List.Add("}", Token_Class.RBRACES);
-            Operators_List.Add(":=", Token_Class.ASSIGN);
         }
         // Scanning function for identifying and attaching lexemes with token_classes
         public void Scan(String SRC)
@@ -69,26 +70,30 @@ namespace WindowsFormsApp1
                     continue;
                 else if (char.IsLetter(Present_Character))
                 {
+                    j++;
                     while (char.IsLetterOrDigit(SRC[j]))
                     {
-                        Lex.Append(SRC[j]);
+                        Lex += SRC[j].ToString();
                         j++;
                     }
+                    j--;
                 }
                 else if (char.IsDigit(Present_Character))
                 {
+                    j++;
                     while (char.IsDigit(SRC[j]))
                     {
-                        Lex.Append(SRC[j]);
+                        Lex += SRC[j].ToString();
                         j++;
                     }
+                    j--;
                 }
                 else if(Present_Character == '/' && SRC[j + 1] == '*')
                 {
-                    j += 2;
+                    j++;
                     while (SRC.Length != j)
                     {
-                        Lex.Append(SRC[j]);
+                        Lex += SRC[j].ToString();
                         if (SRC[j] == '/')
                             break;
                         j++;
@@ -99,14 +104,14 @@ namespace WindowsFormsApp1
                     j += 1;
                     while (SRC.Length != j)
                     {
-                        Lex.Append(SRC[j]);
+                        Lex += SRC[j].ToString();
                         if (SRC[j] == '\"')
                             break;
                         j++;
                     }
                 }
                 else if(Present_Character == ':' && SRC[++j] == '=')
-                    Lex.Append(SRC[j]);
+                    Lex += SRC[j].ToString();
                 i = j;
                 FindTokenClass(Lex);
             }
@@ -121,19 +126,19 @@ namespace WindowsFormsApp1
             if (isReserved_Keyword(Lex))
                 token.token_type = Reserved_Keys_List[Lex];
             // Checking If Identifier
-            if (isIdentifier(Lex))
+            else if (isIdentifier(Lex))
                 token.token_type = Token_Class.IDENTIFIER;
             // Checking If Constant
-            if (isConstant(Lex))
+            else if (isConstant(Lex))
                 token.token_type = Token_Class.NUMBER;
             // Checking If Operator
-            if (isOperator(Lex))
+            else if (isOperator(Lex))
                 token.token_type = Operators_List[Lex];
             // Checking If Comment
-            if (isComment(Lex))
+            else if (isComment(Lex))
                 token.token_type = Token_Class.COMMENT;
             // Checking If String Value
-            if (isString(Lex))
+            else if (isString(Lex))
                 token.token_type = Token_Class.STRING;
             // Unidentfied Lexeme
             else
@@ -150,7 +155,7 @@ namespace WindowsFormsApp1
             bool Valid = true;
             if (char.IsLetter(Lex[0]))
             {
-                int i = 1;
+                int i = 0;
                 while (Lex.Length > i)
                 {
                     if (!char.IsLetterOrDigit(Lex[i]))
@@ -158,6 +163,8 @@ namespace WindowsFormsApp1
                     i++;
                 }
             }
+            else
+                Valid = false;
             return Valid;
         }
         public static bool isOperator(String Lex)

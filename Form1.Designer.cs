@@ -38,8 +38,8 @@ namespace WindowsFormsApp1
             this.tokenClasses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button_WOC3 = new ePOSOne.btnProduct.Button_WOC();
-            this.button_WOC1 = new ePOSOne.btnProduct.Button_WOC();
+            this.Clear = new ePOSOne.btnProduct.Button_WOC();
+            this.Compile = new ePOSOne.btnProduct.Button_WOC();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,51 +123,51 @@ namespace WindowsFormsApp1
             this.textBox2.TabIndex = 6;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // button_WOC3
+            // Clear
             // 
-            this.button_WOC3.BorderColor = System.Drawing.Color.Silver;
-            this.button_WOC3.ButtonColor = System.Drawing.Color.Silver;
-            this.button_WOC3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button_WOC3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_WOC3.ForeColor = System.Drawing.Color.Black;
-            this.button_WOC3.Location = new System.Drawing.Point(489, 534);
-            this.button_WOC3.Name = "button_WOC3";
-            this.button_WOC3.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.button_WOC3.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.button_WOC3.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.button_WOC3.Size = new System.Drawing.Size(101, 44);
-            this.button_WOC3.TabIndex = 9;
-            this.button_WOC3.Text = "Clear";
-            this.button_WOC3.TextColor = System.Drawing.Color.Black;
-            this.button_WOC3.UseVisualStyleBackColor = true;
-            this.button_WOC3.Click += new System.EventHandler(this.button_WOC3_Click);
+            this.Clear.BorderColor = System.Drawing.Color.Silver;
+            this.Clear.ButtonColor = System.Drawing.Color.Silver;
+            this.Clear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Clear.ForeColor = System.Drawing.Color.Black;
+            this.Clear.Location = new System.Drawing.Point(489, 534);
+            this.Clear.Name = "Clear";
+            this.Clear.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.Clear.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.Clear.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.Clear.Size = new System.Drawing.Size(101, 44);
+            this.Clear.TabIndex = 9;
+            this.Clear.Text = "Clear";
+            this.Clear.TextColor = System.Drawing.Color.Black;
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.button_WOC3_Click);
             // 
-            // button_WOC1
+            // Compile
             // 
-            this.button_WOC1.BorderColor = System.Drawing.Color.Silver;
-            this.button_WOC1.ButtonColor = System.Drawing.Color.Silver;
-            this.button_WOC1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button_WOC1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_WOC1.ForeColor = System.Drawing.Color.Black;
-            this.button_WOC1.Location = new System.Drawing.Point(91, 534);
-            this.button_WOC1.Name = "button_WOC1";
-            this.button_WOC1.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.button_WOC1.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.button_WOC1.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.button_WOC1.Size = new System.Drawing.Size(140, 44);
-            this.button_WOC1.TabIndex = 7;
-            this.button_WOC1.Text = "Compile";
-            this.button_WOC1.TextColor = System.Drawing.Color.Black;
-            this.button_WOC1.UseVisualStyleBackColor = true;
-            this.button_WOC1.Click += new System.EventHandler(this.button_WOC1_Click);
+            this.Compile.BorderColor = System.Drawing.Color.Silver;
+            this.Compile.ButtonColor = System.Drawing.Color.Silver;
+            this.Compile.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Compile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Compile.ForeColor = System.Drawing.Color.Black;
+            this.Compile.Location = new System.Drawing.Point(91, 534);
+            this.Compile.Name = "Compile";
+            this.Compile.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.Compile.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.Compile.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.Compile.Size = new System.Drawing.Size(140, 44);
+            this.Compile.TabIndex = 7;
+            this.Compile.Text = "Compile";
+            this.Compile.TextColor = System.Drawing.Color.Black;
+            this.Compile.UseVisualStyleBackColor = true;
+            this.Compile.Click += new System.EventHandler(this.button_WOC1_Click);
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1005, 611);
-            this.Controls.Add(this.button_WOC3);
-            this.Controls.Add(this.button_WOC1);
+            this.Controls.Add(this.Clear);
+            this.Controls.Add(this.Compile);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
@@ -193,8 +193,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.DataGridViewTextBoxColumn tokenClasses;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
-        private ePOSOne.btnProduct.Button_WOC button_WOC1;
-        private ePOSOne.btnProduct.Button_WOC button_WOC3;
+        private ePOSOne.btnProduct.Button_WOC Compile;
+        private ePOSOne.btnProduct.Button_WOC Clear;
     }
 }
 
