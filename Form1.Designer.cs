@@ -29,8 +29,8 @@ namespace Tiny_Compiler
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -38,6 +38,9 @@ namespace Tiny_Compiler
             this.tokenClasses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.Clear = new ePOSOne.btnProduct.Button_WOC();
             this.Compile = new ePOSOne.btnProduct.Button_WOC();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -57,10 +60,10 @@ namespace Tiny_Compiler
             // textBox1
             // 
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBox1.Location = new System.Drawing.Point(12, 47);
+            this.textBox1.Location = new System.Drawing.Point(12, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(381, 476);
+            this.textBox1.Size = new System.Drawing.Size(381, 676);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -71,21 +74,21 @@ namespace Tiny_Compiler
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lexeme,
             this.tokenClasses});
-            this.dataGridView1.Location = new System.Drawing.Point(424, 48);
+            this.dataGridView1.Location = new System.Drawing.Point(417, 47);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Size = new System.Drawing.Size(245, 476);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Size = new System.Drawing.Size(476, 677);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -107,7 +110,7 @@ namespace Tiny_Compiler
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(690, 47);
+            this.label2.Location = new System.Drawing.Point(915, 530);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(123, 29);
             this.label2.TabIndex = 5;
@@ -116,12 +119,40 @@ namespace Tiny_Compiler
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(694, 70);
+            this.textBox2.Location = new System.Drawing.Point(920, 562);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(299, 167);
+            this.textBox2.Size = new System.Drawing.Size(498, 162);
             this.textBox2.TabIndex = 6;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(920, 47);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(498, 480);
+            this.treeView1.TabIndex = 10;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(915, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(139, 29);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Parse Tree";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(412, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 29);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Tokens";
             // 
             // Clear
             // 
@@ -130,12 +161,12 @@ namespace Tiny_Compiler
             this.Clear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.Clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Clear.ForeColor = System.Drawing.Color.Black;
-            this.Clear.Location = new System.Drawing.Point(489, 534);
+            this.Clear.Location = new System.Drawing.Point(589, 773);
             this.Clear.Name = "Clear";
             this.Clear.OnHoverBorderColor = System.Drawing.Color.Gray;
             this.Clear.OnHoverButtonColor = System.Drawing.Color.Yellow;
             this.Clear.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.Clear.Size = new System.Drawing.Size(101, 44);
+            this.Clear.Size = new System.Drawing.Size(140, 44);
             this.Clear.TabIndex = 9;
             this.Clear.Text = "Clear";
             this.Clear.TextColor = System.Drawing.Color.Black;
@@ -149,7 +180,7 @@ namespace Tiny_Compiler
             this.Compile.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.Compile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Compile.ForeColor = System.Drawing.Color.Black;
-            this.Compile.Location = new System.Drawing.Point(91, 534);
+            this.Compile.Location = new System.Drawing.Point(116, 773);
             this.Compile.Name = "Compile";
             this.Compile.OnHoverBorderColor = System.Drawing.Color.Gray;
             this.Compile.OnHoverButtonColor = System.Drawing.Color.Yellow;
@@ -165,7 +196,10 @@ namespace Tiny_Compiler
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1005, 611);
+            this.ClientSize = new System.Drawing.Size(1520, 889);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.Compile);
             this.Controls.Add(this.textBox2);
@@ -195,6 +229,9 @@ namespace Tiny_Compiler
         private System.Windows.Forms.TextBox textBox2;
         private ePOSOne.btnProduct.Button_WOC Compile;
         private ePOSOne.btnProduct.Button_WOC Clear;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

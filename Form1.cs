@@ -82,5 +82,10 @@ namespace Tiny_Compiler
                 textBox2.Text += "\r\n";
             }
         }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
     }
 }
