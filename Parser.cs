@@ -388,23 +388,22 @@ namespace Tiny_Compiler
                 node.Children.Add(match(Token_Class.MTOP));
             else if (TokenStream[InputPointer].token_type == Token_Class.EQOP)
                 node.Children.Add(match(Token_Class.EQOP));
-            else
-            {
-                node.Children.Add(match(Token_Class.LTOP));
-                node.Children.Add(match(Token_Class.MTOP));
-            }
-
+            else if(TokenStream[InputPointer].token_type == Token_Class.NEQOP)
+                node.Children.Add(match(Token_Class.NEQOP));
             return node;
         }
 
         Node Cond()
         {
             Node node = new Node("Condition");
-
-            node.Children.Add(match(Token_Class.IDENTIFIER));
-            node.Children.Add(CO());
-            node.Children.Add(Term());
-
+            if (TokenStream[InputPointer].token_type == Token_Class.IDENTIFIER)
+            {
+                node.Children.Add(match(Token_Class.IDENTIFIER));
+                node.Children.Add(CO());
+                node.Children.Add(Term());
+            }
+            else
+                node = null;
             return node;
         }
 
@@ -430,50 +429,45 @@ namespace Tiny_Compiler
         Node If_Stat()
         {
             Node node = new Node("If Statement");
-
             node.Children.Add(match(Token_Class.IF));
             node.Children.Add(Cond_Stat());
-
-            // Token class : THEN (NOT FOUND) DONE
-            node.Children.Add(match(Token_Class.THEN));
-
+            if (TokenStream[InputPointer].token_type == Token_Class.THEN)
+                node.Children.Add(match(Token_Class.THEN));
             node.Children.Add(Stats_SetD());
             node.Children.Add(ElseIF_StatD());
             node.Children.Add(Else_StatD());
-
-            // Token Class : END for IF, ElseIF, and Else (NOT FOUND) DONE
-            node.Children.Add(match(Token_Class.END));
-
+            if (TokenStream[InputPointer].token_type == Token_Class.END)
+                node.Children.Add(match(Token_Class.END));
             return node;
         }
 
         Node ElseIF_StatD()
         {
             Node node = new Node("Elseif Statements");
-
-            node.Children.Add(ElseIF_StatD());
-            node.Children.Add(ElseIF_Stat());
-
+            Node tmpElseIf = ElseIF_Stat();
+            node.Children.Add(tmpElseIf);
+            if(!(tmpElseIf == null))
+                node.Children.Add(ElseIF_StatD());
             return node;
         }
 
         Node ElseIF_Stat()
         {
             Node node = new Node("Elseif Statement");
-
-            node.Children.Add(match(Token_Class.ELSEIF));
-            node.Children.Add(Cond());
-
-            // Token class : THEN (NOT FOUND)
-            node.Children.Add(match(Token_Class.THEN));
-
-            node.Children.Add(Stats_SetD());
-            node.Children.Add(Stats_SetD());
-            node.Children.Add(Else_StatD());
-
-            // Token Class : END for IF, ElseIF, and Else (NOT FOUND)
-            node.Children.Add(match(Token_Class.END));
-
+            if (TokenStream[InputPointer].token_type == Token_Class.ELSEIF)
+            {
+                node.Children.Add(match(Token_Class.ELSEIF));
+                node.Children.Add(Cond());
+                if(TokenStream[InputPointer].token_type == Token_Class.THEN)
+                    node.Children.Add(match(Token_Class.THEN));
+                node.Children.Add(Stats_SetD());
+                node.Children.Add(Stats_SetD());
+                node.Children.Add(Else_StatD());
+                if (TokenStream[InputPointer].token_type == Token_Class.END)
+                    node.Children.Add(match(Token_Class.END));
+            }
+            else
+                node = null;
             return node;
         }
 
@@ -485,10 +479,8 @@ namespace Tiny_Compiler
             {
                 node.Children.Add(match(Token_Class.ELSE));
                 node.Children.Add(Stats_SetD());
-
-                // Token Class : END for IF, ElseIF, and Else (NOT FOUND)
-                node.Children.Add(match(Token_Class.END));
-
+                if (TokenStream[InputPointer].token_type == Token_Class.END)
+                    node.Children.Add(match(Token_Class.END));
             }
             else
                 node = null;
