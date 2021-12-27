@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 public enum Token_Class
 {
    DATATYPE_INT,DATATYPE_FLOAT,DATATYPE_STRING,NUMBER,STRING,READ,WRITE,REPEAT,UNTIL,IF,ELSEIF,ELSE,RETURN,ENDL,
-    IDENTIFIER,PROGRAM,FUNCTION,PLUSOP,MINUSOP,MULOP,DIVOP,LTOP,MTOP,EQOP,
+    IDENTIFIER,PROGRAM,FUNCTION,PLUSOP,MINUSOP,MULOP,DIVOP,LTOP,MTOP,EQOP,END,THEN,
     NEQOP,COMMA,SEMICOLON,DOT,LBRACES,RBRACES,LPARENT,RPARENT,ASSIGN,COMMENT,NA,AND,OR,MAIN
 }
 namespace Tiny_Compiler
@@ -43,6 +43,8 @@ namespace Tiny_Compiler
             Reserved_Keys_List.Add("endl", Token_Class.ENDL);
             Reserved_Keys_List.Add("return", Token_Class.RETURN);
             Reserved_Keys_List.Add("main", Token_Class.MAIN);
+            Reserved_Keys_List.Add("then", Token_Class.THEN);
+            Reserved_Keys_List.Add("end", Token_Class.END);
 
             Operators_List.Add(",", Token_Class.COMMA);
             Operators_List.Add(";", Token_Class.SEMICOLON);

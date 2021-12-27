@@ -53,6 +53,7 @@ namespace Tiny_Compiler
             string SRC = textBox1.Text;
             Compiler.Compile(SRC);
             Tokens_Output();
+            treeView1.Nodes.Add(Parser.PrintParseTree(Compiler.treeroot));
             Errors_Output();
         }
         // Tokens Filtered
