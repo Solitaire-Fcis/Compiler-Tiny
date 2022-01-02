@@ -37,6 +37,7 @@ namespace Tiny_Compiler
         private void button_WOC3_Click(object sender, EventArgs e)
         {
             Compiler.Syntax_Errors.Clear();
+            Compiler.Lexical_Errors.Clear();
             Compiler.Tokens_List.Clear();
             dataGridView1.Rows.Clear();
             textBox2.Text = "";

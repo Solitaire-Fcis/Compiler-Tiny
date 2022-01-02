@@ -48,3 +48,13 @@ E:\Work\FCIS\4th Year\CS\Compilers\Tasks\Compiler Project\Compiler-Tiny-Last\obj
 E:\Work\FCIS\4th Year\CS\Compilers\Tasks\Compiler Project\Compiler-Tiny-Last\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 E:\Work\FCIS\4th Year\CS\Compilers\Tasks\Compiler Project\Compiler-Tiny-Last\obj\Debug\WindowsFormsApp1.exe
 E:\Work\FCIS\4th Year\CS\Compilers\Tasks\Compiler Project\Compiler-Tiny-Last\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\AnTaR\Desktop\Compiler-Tiny\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\AnTaR\Desktop\Compiler-Tiny\bin\Debug\WindowsFormsApp1.exe
+C:\Users\AnTaR\Desktop\Compiler-Tiny\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\Tiny_Compiler.Form1.resources
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.exe
+C:\Users\AnTaR\Desktop\Compiler-Tiny\obj\Debug\WindowsFormsApp1.pdb
