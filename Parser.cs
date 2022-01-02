@@ -33,17 +33,15 @@ namespace Tiny_Compiler
         Node Program()
         {
             Node program = new Node("Program");
-            if (!((TokenStream[InputPointer].token_type == Token_Class.DATATYPE_FLOAT ||
-                TokenStream[InputPointer].token_type == Token_Class.DATATYPE_INT ||
-                TokenStream[InputPointer].token_type == Token_Class.DATATYPE_STRING) && 
-                TokenStream[InputPointer+1].token_type == Token_Class.MAIN))
-                program.Children.Add(Fun_statD());
+            program.Children.Add(Fun_statD());
             program.Children.Add(Main());
             return program;
         }
         Node Fun_statD()
         {
             Node Fun_statDN = new Node("Functions");
+            if (InputPointer >= TokenStream.Count)
+                return null;
             if (!((TokenStream[InputPointer].token_type == Token_Class.DATATYPE_FLOAT ||
                 TokenStream[InputPointer].token_type == Token_Class.DATATYPE_INT ||
                 TokenStream[InputPointer].token_type == Token_Class.DATATYPE_STRING) &&
@@ -61,7 +59,12 @@ namespace Tiny_Compiler
         Node Main()
         {
             Node main = new Node("Main");
-            if(TokenStream[InputPointer].token_type == Token_Class.DATATYPE_FLOAT)
+            if (InputPointer >= TokenStream.Count)
+            {
+                Compiler.Syntax_Errors.Add("Parsing Error: Program Doesn't Contain Exactly One main Function");
+                return null;
+            }
+            if (TokenStream[InputPointer].token_type == Token_Class.DATATYPE_FLOAT)
                 main.Children.Add(match(Token_Class.DATATYPE_FLOAT));
             else if(TokenStream[InputPointer].token_type == Token_Class.DATATYPE_INT)
                 main.Children.Add(match(Token_Class.DATATYPE_INT));
@@ -98,7 +101,7 @@ namespace Tiny_Compiler
                 }
                 else
                     match(TokenStream[InputPointer].token_type);
-                Compiler.Syntax_Errors.Add("Warning: The Following Token Is Ignored " + TokenStream[InputPointer - 1].token_type.ToString() + " Reason: Function Already Returned");
+                Compiler.Syntax_Errors.Add("Warning: The Following Token Is Ignored " + TokenStream[InputPointer - 1].token_type.ToString() + " At TokenStream Index #" + (InputPointer - 1) + " Reason: Function Already Returned");
             }
             Fun_BodN.Children.Add(match(Token_Class.RBRACES));
             return Fun_BodN;

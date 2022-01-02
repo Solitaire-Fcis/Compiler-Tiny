@@ -176,7 +176,7 @@ namespace Tiny_Compiler
             else
             {
                 token.token_type = Token_Class.NA;
-                Compiler.Syntax_Errors.Add(Lex);
+                Compiler.Lexical_Errors.Add(Lex);
                 NA = true;
             }
             if(!NA)

@@ -10,6 +10,7 @@ namespace Tiny_Compiler
     public static class Compiler
     {
         // Declarations for Compiling and Pre-Processing
+        public static List<String> Lexical_Errors = new List<String>();
         public static List<String> Syntax_Errors = new List<String>();
         public static Scanner SC = new Scanner();
         public static Parser PS = new Parser();

@@ -39,7 +39,9 @@ namespace Tiny_Compiler
             Compiler.Syntax_Errors.Clear();
             Compiler.Tokens_List.Clear();
             dataGridView1.Rows.Clear();
+            textBox2.Text = "";
             textBox2.Clear();
+            treeView1.Nodes.Clear();
         }
         // Source Code
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -77,6 +79,13 @@ namespace Tiny_Compiler
         // Print Errors in Source Code
         private void Errors_Output()
         {
+            textBox2.Text += "Lexical Errors As Follows:\r\n";
+            for (int i = 0; i < Compiler.Lexical_Errors.Count; i++)
+            {
+                textBox2.Text += Compiler.Lexical_Errors[i];
+                textBox2.Text += "\r\n";
+            }
+            textBox2.Text += "Syntax Errors As Follows:\r\n";
             for (int i = 0; i < Compiler.Syntax_Errors.Count; i++)
             {
                 textBox2.Text += Compiler.Syntax_Errors[i];
